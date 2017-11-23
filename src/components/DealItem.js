@@ -1,18 +1,24 @@
 //import liraries
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { priceDisplay } from '../util';
 
 // create a component
 class MyClass extends React.Component {
     static propTypes = {
         deal: PropTypes.object.isRequired,
+        onPress: PropTypes.func.isRequired,
+    }
+    handlePress = () => {
+        this.props.onPress(this.props.deal.key);
     }
     render() {
         const { deal } = this.props;
         return (
-            <View style={styles.deal}>
+            <TouchableOpacity style={styles.deal}
+                onPress={this.handlePress}
+            >
                 <Image source={{ uri: deal.media[0] }} 
                 style={styles.image}
                 />
@@ -23,7 +29,7 @@ class MyClass extends React.Component {
                         <Text style={styles.price}>{deal.cause.name}</Text>
                     </View>
                 </View>
-            </View>
+            </TouchableOpacity>
         );
     }
 }

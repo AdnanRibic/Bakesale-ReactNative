@@ -1,16 +1,19 @@
 //import liraries
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image , Touchable} from 'react-native';
 import { priceDisplay } from '../util';
 
 // create a component
-class MyClass extends React.Component {
+class DealDetail extends React.Component {
     static propTypes = {
-        deal: PropTypes.object.isRequired,
+        initialDealData: PropTypes.object.isRequired,
+    }
+    state = {
+        deal: this.props.initialDealData,
     }
     render() {
-        const { deal } = this.props;
+        const { deal } = this.state;
         return (
             <View style={styles.deal}>
                 <Image source={{ uri: deal.media[0] }} 
@@ -22,6 +25,7 @@ class MyClass extends React.Component {
                         <Text style={styles.cause}>{priceDisplay(deal.price)}</Text>
                         <Text style={styles.price}>{deal.cause.name}</Text>
                     </View>
+                    <Text> ... </Text>
                 </View>
             </View>
         );
@@ -37,7 +41,7 @@ const styles = StyleSheet.create({
     },
     deal: {
         marginHorizontal: 12,
-        marginTop: 20,
+        marginTop: 50,
     },
     info: {
         padding: 10,
@@ -64,4 +68,4 @@ const styles = StyleSheet.create({
 });
 
 //make this component available to the app
-export default MyClass;
+export default DealDetail;
